@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ImBridgeDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 910047Denik
+    ports:
+      - "5432:5432"
+    networks:
+      - app-net
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-net
+
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && daphne -b 0.0.0.0 -p 8000 imbridgesever.asgi:application"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://postgres:910047Denik@db/ImBridgeDB
+      REDIS_URL: redis://redis:6379/1
+    networks:
+      - app-net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  app-net:
+    driver: bridge
