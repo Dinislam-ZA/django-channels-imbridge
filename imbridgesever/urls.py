@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from device_chat.views import DeviceListView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/devices/', DeviceListView.as_view(), name='device-list'),
 ]
