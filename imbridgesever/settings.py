@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n0sm-q-0!d#c!rzkv1v9heah(63l^qjox$q-a=gs5ur=wtjd5i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2',]
 
 ASGI_APPLICATION = 'imbridgesever.asgi.application'
 
