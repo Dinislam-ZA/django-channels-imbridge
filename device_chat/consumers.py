@@ -142,12 +142,10 @@ class DeviceStatusConsumer(AsyncWebsocketConsumer):
         await self.accept()
         await self.send(text_data=json.dumps({
             'type': 'device_state',
-            'device': {
-                'name': device.name,
-                'image': device.image,
-                'brightness': device.brightness,
-                'is_on': device.is_on
-            }
+            'name': device.name,
+            'image': device.image,
+            'brightness': device.brightness,
+            'is_on': device.is_on
         }))
 
         # Обновляем статус подключения устройства
